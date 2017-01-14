@@ -4,6 +4,9 @@
 
 // Its purpose is to reveal who is behind the fuzzy image, the answer was rick astley... 
 
+// The RGBTRIPLE struct holds three 8 bit bytes, the first, second, and third byte representing the R,G,B values
+// The info and fileheader structs are specific to the BMP file format, the size of which is available on MSDN
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -79,7 +82,7 @@ int main(int argc, char* argv[])
             // read RGB triple from infile
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
             
-            triple.rgbtGreen -= 0x1;
+            triple.rgbtGreen -= 0x1; // this will cause (255,0,0) pixels to turn white (255,255,255)
             triple.rgbtBlue -= 0x1;
 
             //increases contrast in a shitty/hack way
